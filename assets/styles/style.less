@@ -1,0 +1,902 @@
+@keyframes legal {
+	0% {
+		color: transparent;
+	}
+
+	30% {
+		color: rgba(255, 255, 255, 0.5);
+	}
+
+	85% {
+		opacity: 1;
+		padding-top: 200px;
+	}
+
+	100% {
+		opacity: 0;
+		padding-top: 0px;
+		z-index: -1;
+	}
+}
+
+@keyframes hover {
+	from {
+		transform: translateY(0);
+	}
+
+	to {
+		transform: translateY(10px);
+	}
+}
+
+@keyframes rotors {
+	from {
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+
+	to {
+		border-color: rgba(255, 255, 255, 0.5);
+	}
+}
+
+html, body {
+	background: #1d1b24;
+	font-family: 'Roboto', sans-serif;
+	height: 100%;
+	overflow: hidden;
+	width: 100%;
+}
+
+#legal {
+	animation: legal 8s linear forwards;
+	background: #13131a;
+    bottom: 0;
+    color: rgba(255, 255, 255, 0.5);
+    left: 0;
+	padding-top: 200px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    z-index: 100;
+
+	p {
+		padding-top: 25px;
+	}
+}
+
+#gameover {
+	background: #13131a;
+    bottom: 0;
+	color: rgba(255, 255, 255, 0.5);
+    left: 0;
+	opacity: 10;
+	padding-top: 200px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+	transition: opacity 3s linear;
+    top: 0;
+    z-index: -1;
+	                    	
+	&.visible {
+		opacity: 1;
+		z-index: 100;
+
+		h3, p {
+			opacity: 1;
+		}
+	}
+
+	h3 {
+		color: #ffffff;
+		font-family: 'Bowlby One SC', 'Roboto', sans-serif;
+		font-size: 70px;
+		opacity: 0;
+		padding-bottom: 20px;
+		transition: opacity 2s 1s linear;
+	}
+
+	p {
+		line-height: 24px;
+		opacity: 0;
+		padding: 20px 20%;
+		transition: opacity 2s 3s linear;
+
+		&.disclaimer {
+			bottom: 20px;
+			left: 0;
+			position: absolute;
+			right: 0;
+		}
+
+		a {
+			color: #62769a;
+			text-decoration: none;
+
+			&:hover {
+				color: #4a576f;
+			}
+		}
+	}
+}
+
+#menu {
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: transform 2s ease;
+
+	&.zoomed {
+		transform: scale(2);
+
+		.levels li {
+			opacity: 0;
+		}
+	}
+
+	&.idle {
+		.intro {
+			h1 {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			.button, .legal {
+				opacity: 1;
+			}
+		}
+
+		.levels {
+			top: 100%;
+
+			&::before {
+				top: -240px;
+			}
+		}
+	}
+
+	.intro {
+		background: url(../images/stars-nw.png) top left no-repeat, url(../images/stars-ne.png) top right no-repeat, radial-gradient(at bottom, #43515b, #2a2932, transparent), url(../images/bg_dark.png), #1d1b24;
+		color: #f9efe7;
+		height: 100%;
+		text-align: center;
+
+		&::after {
+			background: #f9efe7;
+			border-radius: 100%;
+			box-shadow: 0 0 20px rgba(249, 239, 231, 0.5), 0 0 50px rgba(249, 239, 231, 0.5);
+			content: '';
+			height: 100px;
+			position: absolute;
+			right: 10%;
+			top: 15%;
+			width: 100px;
+		}
+
+		h1 {
+			font-family: 'Bowlby One SC', 'Roboto', sans-serif;
+			font-size: 70px;
+			opacity: 0;
+			padding-top: 400px;
+			transform: translateY(-500px);
+			transition: opacity 0.5s 0.5s linear, transform 0.75s 0.5s ease;
+		}
+
+		.button {
+			background: rgba(98, 118, 154, 0.2);
+			border: 3px solid #62769a;
+			border-radius: 3px;
+			color: #ffffff;
+			cursor: pointer;
+			display: inline-block;
+			font-size: 18px;
+			margin-top: 50px;
+			opacity: 0;
+			padding: 10px 26px;
+			text-transform: uppercase;
+			transition: background 0.5s ease, opacity 0.5s linear;
+
+			&:active {
+				margin-top: 53px;
+			}
+
+			&:hover {
+				background: rgba(98, 118, 154, 0.5);
+			}
+		}
+
+		.legal {
+			bottom: 10px;
+			color: #4e5563;
+			display: block;
+			font-size: 12px;
+			opacity: 0;
+			position: absolute;
+			transition: opacity 0.5s linear;
+			width: 100%;
+			z-index: 10;
+		}
+	}
+
+	.levels {
+		background: url(../images/overworld-forest.png) top center, url(../images/bg_dark.png), #1d1b24;
+		color: #f9efe7;
+		height: 80%;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 20%;
+		transition: top 2s 2s ease;
+
+		&::after {
+			background: url(../images/mountains-small.png) bottom center repeat-x;
+			content: '';
+			height: 120px;
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: -120px;
+		}
+
+		&::before {
+			background: url(../images/mountains-large.png) top right repeat-x;
+			content: '';
+			height: 240px;
+			left: 0;
+			position: absolute;
+			right: 0;
+			transition: top 2s 2s linear;
+			top: -275px;
+		}
+
+		li {
+			cursor: pointer;
+			font-family: 'Bowlby One SC', 'Roboto', sans-serif;
+			font-size: 18px;
+			height: 20px;
+			left: 0;
+			line-height: 20px;
+			margin: auto;
+			position: absolute;
+			right: 0;
+			text-align: center;
+			top: 0;
+			transition: opacity 0.5s linear;
+			white-space: nowrap;
+			width: 0;
+
+			&::after {
+				background: transparent;
+				border: 8px solid #50506f;
+				border-radius: 100%;
+				content: '';
+				height: 12px;
+				left: 0;
+				position: absolute;
+				top: -5px;
+				width: 12px;
+				z-index: 0;
+			}
+
+			&::before {
+				border-color: #50506f transparent transparent transparent;
+				border-style: solid;
+				border-width: 16px 13px 0 13px;
+				content: '';
+				height: 0;
+				left: 1px;
+				position: absolute;
+				top: 15px;
+				width: 0;
+			}
+
+			&:hover {
+				opacity: 0.8;
+			}
+
+			&[unlocked="false"] {
+				color: transparent;
+				opacity: 0.25;
+			}
+			
+			&[complete="true"] {
+				&::after {
+					border-color: #93bb4e;
+				}
+				
+				&::before {
+					border-top-color: #93bb4e;
+				}
+			}
+
+			b {
+				color: #ffffff;
+				display: inline-block;
+				font-size: 20px;
+				padding-right: 12px;
+				position: relative;
+				text-shadow: 0 1px 3px #15151c;
+				width: 28px;
+				vertical-align: middle;
+				z-index: 1;
+			}
+		}
+	}
+}
+
+#drone {
+	animation: hover 3s alternate-reverse infinite ease;
+	background: url(../images/entity-drone.png) center center no-repeat;
+	bottom: 150px;
+	cursor: pointer;
+	height: 48px;
+	position: fixed;
+	right: -75px;
+	transition: bottom 1s ease, right 1s ease;
+	width: 48px;
+	z-index: 50;
+
+	&:not([tip=""]) {
+		bottom: 75px;
+		right: 10%;
+
+		&::after {
+			background: #4c4a5a;
+			border-radius: 5px;
+			bottom: 50px;
+			color: #bebed0;
+			content: attr(tip);
+			font-size: 14px;
+			line-height: 18px;
+			padding: 10px;
+			position: absolute;
+			right: 35px;
+			max-width: 550px;
+			white-space: pre;
+		}
+	}
+
+	&::before {
+		animation: rotors 0.03s steps(2) alternate-reverse infinite;
+		border-left: 20px solid rgba(255, 255, 255, 0.1);
+		border-right: 20px solid rgba(255, 255, 255, 0.1);
+		content: '';
+		height: 1px;
+		left: -8px;
+		position: absolute;
+		top: 13px;
+		width: 24px;
+	}
+}
+
+#alert {
+	background: rgba(0 ,0, 0, 0.75);
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	transition: opacity 1s linear;
+	z-index: -1;
+
+	&.visible {
+		opacity: 1;
+		z-index: 100;
+	}
+
+	.modal {
+		left: 0;
+		margin: auto;
+		position: absolute;
+		right: 0;
+		text-align: center;
+		top: 25%;
+		width: 400px;
+
+		h2 {
+			color: #f9efe7;
+			font-family: 'Bowlby One SC', 'Roboto', sans-serif;
+			font-size: 35px;
+		}
+
+		p {
+			color: rgba(255, 255, 255, 0.5);
+			font-size: 20px;
+			padding-top: 20px;
+		}
+
+		.button {
+			background: rgba(98, 118, 154, 0.2);
+			border: 3px solid #62769a;
+			border-radius: 3px;
+			color: #ffffff;
+			cursor: pointer;
+			display: inline-block;
+			font-size: 18px;
+			margin-top: 25px;
+			padding: 10px 26px;
+			text-transform: uppercase;
+			transition: background 0.5s ease, opacity 0.5s linear;
+
+			&:active {
+				margin-top: 28px;
+			}
+
+			&:hover {
+				background: rgba(98, 118, 154, 0.5);
+			}
+		}
+	}
+}
+
+#mute {
+	bottom: 15px;
+	cursor: pointer;
+	left: 15px;
+	position: fixed;
+	text-transform: uppercase;
+	z-index: 10;
+
+	li {
+		color: rgba(255, 255, 255, 0.5);
+		float: left;
+		margin-right: 15px;
+
+		&:hover {
+			color: rgba(255, 255, 255, 0.75);
+		}
+
+		&[muted="true"] {
+			opacity: 0.5;
+			text-decoration: line-through;
+		}
+	}
+}
+
+#game {
+	background: url(../images/forest-se.png) bottom right no-repeat, url(../images/forest-nw.png) top left no-repeat, url(../images/bg_dark.png), #1d1b24;
+	bottom: 0;
+	left: 0;
+	opacity: 1;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: opacity 0.5s 0.5s linear, transform 1s ease;
+	z-index: 1;
+
+	&.hidden {
+		opacity: 0;
+		transform: scale(0);
+		z-index: -1;
+	}
+
+	.time, .tools, .quit {
+		position: absolute;
+		left: 0;
+		right: 0;
+		text-align: center;
+	}
+
+	.time {
+		color: rgba(255, 255, 255, 0.5);
+		font-size: 30px;
+		top: 15px;
+	}
+
+	.quit {
+		color: rgba(255, 255, 255, 0.5);
+		cursor: pointer;
+		top: 55px;
+		text-transform: uppercase;
+		transition: color 1s ease;
+
+		&:hover {
+			color: rgba(255, 255, 255, 0.75);
+		}
+
+		&[confirm="true"] {
+			color: #e46539;
+		}
+	}
+
+	.tools {
+		bottom: 15px;
+
+		li {
+			background: center center no-repeat;
+			border: 1px solid rgba(255, 255, 255, 0.5);
+			border-left: none;
+			cursor: pointer;
+			display: inline-block;
+			height: 48px;
+			position: relative;
+			transition: background 1s ease;
+			width: 48px;
+
+			&::after {
+				bottom: 5px;
+				color: rgba(255, 255, 255, 0.5);
+				content: attr(count);
+				position: absolute;
+				right: 5px;
+			}
+
+			&:hover, &.active {
+				background-color: rgba(98, 118, 154, 0.5);
+			}
+
+			&:first-child {
+				border-left: 1px solid rgba(255, 255, 255, 0.5);
+			}
+
+			&[type="cables"] {
+				background-image: url(../images/tool_cables.png);
+			}
+
+			&[type="resistor"] {
+				background-image: url(../images/tool_resistor.png);
+			}
+		}
+	}
+
+	.grid {
+		bottom: 0;
+		left: 0;
+		margin: auto;
+		position: absolute;
+		right: 0;
+		//transform: rotateX(60deg) rotateY(0deg) rotateZ(45deg);
+		//transform-style: preserve-3d;
+		top: 0;
+
+		.tile {
+			background: transparent;
+			border-bottom: 1px dashed rgba(255, 255, 255, 0.025);
+			border-right: 1px dashed rgba(255, 255, 255, 0.025);
+			cursor: pointer;
+			height: 48px;
+			position: absolute;
+			transition: background 0.5s ease;
+			width: 48px;
+
+			&:hover {
+				background: rgba(255, 255, 255, 0.05);
+			}
+
+			&[x="0"] {
+				border-left: 1px dashed rgba(255, 255, 255, 0.025);
+			}
+
+			&[y="0"] {
+				border-top: 1px dashed rgba(255, 255, 255, 0.025);
+			}
+		}
+
+		.entity {
+			background-position: center center;
+			height: 48px;
+			pointer-events: none;
+			position: absolute;
+			width: 48px;
+			//transform: rotateX(-31deg) rotateY(46deg) rotateZ(-40deg) translateY(-2px);
+
+
+
+			&[type="house"], &[type="generator"], &[type="resistor"] {
+				&::after {
+					color: rgba(255, 255, 255, 0.5);
+					font-size: 14px;
+					line-height: 20px;
+					position: absolute;
+					text-align: center;
+					transition: color 0.5s ease;
+					top: -20px;
+					width: 48px;
+					z-index: 10;
+				}
+
+				&[type="house"] {
+					&::after {
+						content: attr(power) '/' attr(input);
+					}
+				}
+
+				&[type="generator"], &[type="resistor"] {
+					&::after {
+						content: attr(output);
+						color: #93bb4e;
+					}
+				}
+			}
+
+			&[type="tree-tiered"] {
+				background-image: url(../images/entity-tree-tiered.png);
+			}
+
+			&[type="tree-single"] {
+				background-image: url(../images/entity-tree-single.png);
+			}
+
+			&[type="generator"] {
+				background-image: url(../images/entity-generator.png);
+
+				// Vertical Connections
+				&[linked-north="true"] {
+					background-image: url(../images/entity-generator-n.png);
+				}
+
+				&[linked-south="true"] {
+					background-image: url(../images/entity-generator-s.png);
+				}
+
+				&[linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-generator-ns.png);
+				}
+
+				// Horizontal Connections
+				&[linked-east="true"] {
+					background-image: url(../images/entity-generator-e.png);
+				}
+
+				&[linked-west="true"] {
+					background-image: url(../images/entity-generator-w.png);
+				}
+
+				&[linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-generator-ew.png);
+				}
+
+				// Diagonal Connections
+				&[linked-north="true"][linked-east="true"] {
+					background-image: url(../images/entity-generator-ne.png);
+				}
+
+				&[linked-north="true"][linked-west="true"] {
+					background-image: url(../images/entity-generator-nw.png);
+				}
+
+				&[linked-south="true"][linked-east="true"] {
+					background-image: url(../images/entity-generator-se.png);
+				}
+
+				&[linked-south="true"][linked-west="true"] {
+					background-image: url(../images/entity-generator-sw.png);
+				}
+				
+				// Three-Way Connections
+				&[linked-north="true"][linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-generator-new.png);
+				}
+
+				&[linked-north="true"][linked-south="true"][linked-east="true"] {
+					background-image: url(../images/entity-generator-nse.png);
+				}
+
+				&[linked-north="true"][linked-south="true"][linked-west="true"] {
+					background-image: url(../images/entity-generator-nsw.png);
+				}
+
+				&[linked-south="true"][linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-generator-sew.png);
+				}
+
+				// All connections
+				&[linked-north="true"][linked-south="true"][linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-generator-nsew.png);
+				}
+			}
+
+			&[type="house"] {
+				background-image: url(../images/entity-house.png);
+
+				&[powered="true"] {
+					&::after {
+						color: #93bb4e;
+					}
+
+					&::before {
+						background-image: url(../images/entity-house-powered.png);
+						bottom: 0;
+						content: '';
+						left: 0;
+						position: absolute;
+						right: 0;
+						top: 0;
+					}
+				}
+
+				&[overpowered="true"] {
+					&::after {
+						color: #e46539;
+					}
+				}
+
+				// Vertical Connections
+				&[linked-north="true"] {
+					background-image: url(../images/entity-house-n.png);
+				}
+
+				&[linked-south="true"] {
+					background-image: url(../images/entity-house-s.png);
+				}
+
+				&[linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-house-ns.png);
+				}
+
+				// Horizontal Connections
+				&[linked-east="true"] {
+					background-image: url(../images/entity-house-e.png);
+				}
+
+				&[linked-west="true"] {
+					background-image: url(../images/entity-house-w.png);
+				}
+
+				&[linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-house-ew.png);
+				}
+				
+				// Diagonal Connections
+				&[linked-north="true"][linked-east="true"] {
+					background-image: url(../images/entity-house-ne.png);
+				}
+
+				&[linked-north="true"][linked-west="true"] {
+					background-image: url(../images/entity-house-nw.png);
+				}
+
+				&[linked-south="true"][linked-east="true"] {
+					background-image: url(../images/entity-house-se.png);
+				}
+
+				&[linked-south="true"][linked-west="true"] {
+					background-image: url(../images/entity-house-sw.png);
+				}
+				
+				// Three-Way Connections
+				&[linked-north="true"][linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-house-new.png);
+				}
+
+				&[linked-north="true"][linked-south="true"][linked-east="true"] {
+					background-image: url(../images/entity-house-nse.png);
+				}
+
+				&[linked-north="true"][linked-south="true"][linked-west="true"] {
+					background-image: url(../images/entity-house-nsw.png);
+				}
+
+				&[linked-south="true"][linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-house-sew.png);
+				}
+
+				// All connections
+				&[linked-north="true"][linked-south="true"][linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-house-nsew.png);
+				}
+			}
+
+			&[type="cables"] {
+				background-image: url(../images/entity-cables.png);
+
+				// Vertical Connections
+				&[linked-north="true"] {
+					background-image: url(../images/entity-cables-n.png);
+				}
+
+				&[linked-south="true"] {
+					background-image: url(../images/entity-cables-s.png);
+				}
+
+				&[linked-north="true"][linked-south="true"] {
+					background-image: url(../images/entity-cables-ns.png);
+				}
+
+				// Horizontal Connections
+				&[linked-east="true"] {
+					background-image: url(../images/entity-cables-e.png);
+				}
+
+				&[linked-west="true"] {
+					background-image: url(../images/entity-cables-w.png);
+				}
+
+				&[linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-cables-ew.png);
+				}
+
+				// Diagonal Connections
+				&[linked-north="true"][linked-east="true"] {
+					background-image: url(../images/entity-cables-ne.png);
+				}
+
+				&[linked-north="true"][linked-west="true"] {
+					background-image: url(../images/entity-cables-nw.png);
+				}
+
+				&[linked-south="true"][linked-east="true"] {
+					background-image: url(../images/entity-cables-se.png);
+				}
+
+				&[linked-south="true"][linked-west="true"] {
+					background-image: url(../images/entity-cables-sw.png);
+				}
+			}
+
+			&[type="resistor"] {
+				background-image: url(../images/entity-resistor.png);
+				
+				// Vertical Connections
+				&[linked-north="true"] {
+					background-image: url(../images/entity-resistor-n.png);
+				}
+
+				&[linked-south="true"] {
+					background-image: url(../images/entity-resistor-s.png);
+				}
+
+				&[linked-north="true"][linked-south="true"] {
+					background-image: url(../images/entity-resistor-ns.png);
+				}
+
+				// Horizontal Connections
+				&[linked-east="true"] {
+					background-image: url(../images/entity-resistor-e.png);
+				}
+
+				&[linked-west="true"] {
+					background-image: url(../images/entity-resistor-w.png);
+				}
+
+				&[linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-resistor-ew.png);
+				}
+
+				// Diagonal Connections
+				&[linked-north="true"][linked-east="true"] {
+					background-image: url(../images/entity-resistor-ne.png);
+				}
+
+				&[linked-north="true"][linked-west="true"] {
+					background-image: url(../images/entity-resistor-nw.png);
+				}
+
+				&[linked-south="true"][linked-east="true"] {
+					background-image: url(../images/entity-resistor-se.png);
+				}
+
+				&[linked-south="true"][linked-west="true"] {
+					background-image: url(../images/entity-resistor-sw.png);
+				}
+
+				// Three-Way Connections
+				&[linked-north="true"][linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-resistor-new.png);
+				}
+
+				&[linked-north="true"][linked-south="true"][linked-east="true"] {
+					background-image: url(../images/entity-resistor-nse.png);
+				}
+
+				&[linked-north="true"][linked-south="true"][linked-west="true"] {
+					background-image: url(../images/entity-resistor-nsw.png);
+				}
+
+				&[linked-south="true"][linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-resistor-sew.png);
+				}
+
+				// All connections
+				&[linked-north="true"][linked-south="true"][linked-east="true"][linked-west="true"] {
+					background-image: url(../images/entity-resistor-nsew.png);
+				}
+			}
+		}
+	}
+}

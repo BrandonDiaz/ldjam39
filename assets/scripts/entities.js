@@ -1,0 +1,3 @@
+window.entity_properties = {
+	
+};

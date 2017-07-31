@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>LDJam39</title>
+
+		<link href="assets/styles/reset.css" rel="stylesheet" />
+		<link href="assets/styles/style.css" rel="stylesheet" />
+
+		<link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Roboto:300" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="legal">
+			<p>Developed by Brandon Diaz in 48 hours for Ludum Dare 39, "Running Out of Power."</p>
+			<p>(Best played in Chrome.)</p>
+		</div>
+		<div id="menu" class="idle">
+			<div class="intro">
+				<h1>Lights Out</h1>
+				<span class="button">
+					Start Game
+				</span>
+			</div>
+			<ul class="levels"></ul>
+		</div>
+		<div id="game" class="hidden">
+			<span class="time">00:00</span>
+			<span class="quit">Exit to Map</span>
+			<ul class="tools"></ul>
+			<div class="grid"></div>
+		</div>
+		<div id="drone" tip=""></div>
+		<div id="alert">
+			<div class="modal">
+				<h2>Power Restored!</h2>
+				<p>Completion Time: <b>00:00</b></p>
+				<span class="button">
+					Continue
+				</span>
+			</div>
+		</div>
+		<ul id="mute">
+			<li class="music" muted="false">Music</li>
+			<li class="sound" muted="false">Sound</li>
+		</ul>
+		<div id="gameover">
+			<h3>You Did It!</h3>
+			<p>You restored power to the ungrateful customers of an cold, faceless electrical conglomerate; surely this victory will warm your heart for many nights to come.*</p>
+			<p>Thank you for spending your time and energy on this small slice of the internet. If you're interested in game development, or just love indie games, please check out the <a href="https://ldjam.com">Ludum Dare</a> to learn more about it.</p>
+			<p class="disclaimer">*Heartfelt Warmth caries additional monthly charges</p>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.4/howler.core.min.js" crossorigin="anonymous"></script>
+		<script src="http://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+		<script src="assets/scripts/levels.js" type="text/javascript"></script>
+		<script src="assets/scripts/tips.js" type="text/javascript"></script>
+		<script src="assets/scripts/chirps.js" type="text/javascript"></script>
+		<script src="assets/scripts/tools.js" type="text/javascript"></script>
+		<script src="assets/scripts/main.js" type="text/javascript"></script>
+	</body>
+</html>

@@ -1,0 +1,733 @@
+@keyframes legal {
+  0% {
+    color: transparent;
+  }
+  30% {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  85% {
+    opacity: 1;
+    padding-top: 200px;
+  }
+  100% {
+    opacity: 0;
+    padding-top: 0px;
+    z-index: -1;
+  }
+}
+@keyframes hover {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(10px);
+  }
+}
+@keyframes rotors {
+  from {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  to {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+}
+html,
+body {
+  background: #1d1b24;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+#legal {
+  animation: legal 8s linear forwards;
+  background: #13131a;
+  bottom: 0;
+  color: rgba(255, 255, 255, 0.5);
+  left: 0;
+  padding-top: 200px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  z-index: 100;
+}
+#legal p {
+  padding-top: 25px;
+}
+#gameover {
+  background: #13131a;
+  bottom: 0;
+  color: rgba(255, 255, 255, 0.5);
+  left: 0;
+  opacity: 10;
+  padding-top: 200px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  transition: opacity 3s linear;
+  top: 0;
+  z-index: -1;
+}
+#gameover.visible {
+  opacity: 1;
+  z-index: 100;
+}
+#gameover.visible h3,
+#gameover.visible p {
+  opacity: 1;
+}
+#gameover h3 {
+  color: #ffffff;
+  font-family: 'Bowlby One SC', 'Roboto', sans-serif;
+  font-size: 70px;
+  opacity: 0;
+  padding-bottom: 20px;
+  transition: opacity 2s 1s linear;
+}
+#gameover p {
+  line-height: 24px;
+  opacity: 0;
+  padding: 20px 20%;
+  transition: opacity 2s 3s linear;
+}
+#gameover p.disclaimer {
+  bottom: 20px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+#gameover p a {
+  color: #62769a;
+  text-decoration: none;
+}
+#gameover p a:hover {
+  color: #4a576f;
+}
+#menu {
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: transform 2s ease;
+}
+#menu.zoomed {
+  transform: scale(2);
+}
+#menu.zoomed .levels li {
+  opacity: 0;
+}
+#menu.idle .intro h1 {
+  opacity: 1;
+  transform: translateY(0);
+}
+#menu.idle .intro .button,
+#menu.idle .intro .legal {
+  opacity: 1;
+}
+#menu.idle .levels {
+  top: 100%;
+}
+#menu.idle .levels::before {
+  top: -240px;
+}
+#menu .intro {
+  background: url(../images/stars-nw.png) top left no-repeat, url(../images/stars-ne.png) top right no-repeat, radial-gradient(at bottom, #43515b, #2a2932, transparent), url(../images/bg_dark.png), #1d1b24;
+  color: #f9efe7;
+  height: 100%;
+  text-align: center;
+}
+#menu .intro::after {
+  background: #f9efe7;
+  border-radius: 100%;
+  box-shadow: 0 0 20px rgba(249, 239, 231, 0.5), 0 0 50px rgba(249, 239, 231, 0.5);
+  content: '';
+  height: 100px;
+  position: absolute;
+  right: 10%;
+  top: 15%;
+  width: 100px;
+}
+#menu .intro h1 {
+  font-family: 'Bowlby One SC', 'Roboto', sans-serif;
+  font-size: 70px;
+  opacity: 0;
+  padding-top: 400px;
+  transform: translateY(-500px);
+  transition: opacity 0.5s 0.5s linear, transform 0.75s 0.5s ease;
+}
+#menu .intro .button {
+  background: rgba(98, 118, 154, 0.2);
+  border: 3px solid #62769a;
+  border-radius: 3px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 18px;
+  margin-top: 50px;
+  opacity: 0;
+  padding: 10px 26px;
+  text-transform: uppercase;
+  transition: background 0.5s ease, opacity 0.5s linear;
+}
+#menu .intro .button:active {
+  margin-top: 53px;
+}
+#menu .intro .button:hover {
+  background: rgba(98, 118, 154, 0.5);
+}
+#menu .intro .legal {
+  bottom: 10px;
+  color: #4e5563;
+  display: block;
+  font-size: 12px;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.5s linear;
+  width: 100%;
+  z-index: 10;
+}
+#menu .levels {
+  background: url(../images/overworld-forest.png) top center, url(../images/bg_dark.png), #1d1b24;
+  color: #f9efe7;
+  height: 80%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 20%;
+  transition: top 2s 2s ease;
+}
+#menu .levels::after {
+  background: url(../images/mountains-small.png) bottom center repeat-x;
+  content: '';
+  height: 120px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: -120px;
+}
+#menu .levels::before {
+  background: url(../images/mountains-large.png) top right repeat-x;
+  content: '';
+  height: 240px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  transition: top 2s 2s linear;
+  top: -275px;
+}
+#menu .levels li {
+  cursor: pointer;
+  font-family: 'Bowlby One SC', 'Roboto', sans-serif;
+  font-size: 18px;
+  height: 20px;
+  left: 0;
+  line-height: 20px;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  transition: opacity 0.5s linear;
+  white-space: nowrap;
+  width: 0;
+}
+#menu .levels li::after {
+  background: transparent;
+  border: 8px solid #50506f;
+  border-radius: 100%;
+  content: '';
+  height: 12px;
+  left: 0;
+  position: absolute;
+  top: -5px;
+  width: 12px;
+  z-index: 0;
+}
+#menu .levels li::before {
+  border-color: #50506f transparent transparent transparent;
+  border-style: solid;
+  border-width: 16px 13px 0 13px;
+  content: '';
+  height: 0;
+  left: 1px;
+  position: absolute;
+  top: 15px;
+  width: 0;
+}
+#menu .levels li:hover {
+  opacity: 0.8;
+}
+#menu .levels li[unlocked="false"] {
+  color: transparent;
+  opacity: 0.25;
+}
+#menu .levels li[complete="true"]::after {
+  border-color: #93bb4e;
+}
+#menu .levels li[complete="true"]::before {
+  border-top-color: #93bb4e;
+}
+#menu .levels li b {
+  color: #ffffff;
+  display: inline-block;
+  font-size: 20px;
+  padding-right: 12px;
+  position: relative;
+  text-shadow: 0 1px 3px #15151c;
+  width: 28px;
+  vertical-align: middle;
+  z-index: 1;
+}
+#drone {
+  animation: hover 3s alternate-reverse infinite ease;
+  background: url(../images/entity-drone.png) center center no-repeat;
+  bottom: 150px;
+  cursor: pointer;
+  height: 48px;
+  position: fixed;
+  right: -75px;
+  transition: bottom 1s ease, right 1s ease;
+  width: 48px;
+  z-index: 50;
+}
+#drone:not([tip=""]) {
+  bottom: 75px;
+  right: 10%;
+}
+#drone:not([tip=""])::after {
+  background: #4c4a5a;
+  border-radius: 5px;
+  bottom: 50px;
+  color: #bebed0;
+  content: attr(tip);
+  font-size: 14px;
+  line-height: 18px;
+  padding: 10px;
+  position: absolute;
+  right: 35px;
+  max-width: 550px;
+  white-space: pre;
+}
+#drone::before {
+  animation: rotors 0.03s steps(2) alternate-reverse infinite;
+  border-left: 20px solid rgba(255, 255, 255, 0.1);
+  border-right: 20px solid rgba(255, 255, 255, 0.1);
+  content: '';
+  height: 1px;
+  left: -8px;
+  position: absolute;
+  top: 13px;
+  width: 24px;
+}
+#alert {
+  background: rgba(0, 0, 0, 0.75);
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: opacity 1s linear;
+  z-index: -1;
+}
+#alert.visible {
+  opacity: 1;
+  z-index: 100;
+}
+#alert .modal {
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 25%;
+  width: 400px;
+}
+#alert .modal h2 {
+  color: #f9efe7;
+  font-family: 'Bowlby One SC', 'Roboto', sans-serif;
+  font-size: 35px;
+}
+#alert .modal p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+  padding-top: 20px;
+}
+#alert .modal .button {
+  background: rgba(98, 118, 154, 0.2);
+  border: 3px solid #62769a;
+  border-radius: 3px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 18px;
+  margin-top: 25px;
+  padding: 10px 26px;
+  text-transform: uppercase;
+  transition: background 0.5s ease, opacity 0.5s linear;
+}
+#alert .modal .button:active {
+  margin-top: 28px;
+}
+#alert .modal .button:hover {
+  background: rgba(98, 118, 154, 0.5);
+}
+#mute {
+  bottom: 15px;
+  cursor: pointer;
+  left: 15px;
+  position: fixed;
+  text-transform: uppercase;
+  z-index: 10;
+}
+#mute li {
+  color: rgba(255, 255, 255, 0.5);
+  float: left;
+  margin-right: 15px;
+}
+#mute li:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+#mute li[muted="true"] {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+#game {
+  background: url(../images/forest-se.png) bottom right no-repeat, url(../images/forest-nw.png) top left no-repeat, url(../images/bg_dark.png), #1d1b24;
+  bottom: 0;
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 0.5s 0.5s linear, transform 1s ease;
+  z-index: 1;
+}
+#game.hidden {
+  opacity: 0;
+  transform: scale(0);
+  z-index: -1;
+}
+#game .time,
+#game .tools,
+#game .quit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+#game .time {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 30px;
+  top: 15px;
+}
+#game .quit {
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  top: 55px;
+  text-transform: uppercase;
+  transition: color 1s ease;
+}
+#game .quit:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+#game .quit[confirm="true"] {
+  color: #e46539;
+}
+#game .tools {
+  bottom: 15px;
+}
+#game .tools li {
+  background: center center no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: none;
+  cursor: pointer;
+  display: inline-block;
+  height: 48px;
+  position: relative;
+  transition: background 1s ease;
+  width: 48px;
+}
+#game .tools li::after {
+  bottom: 5px;
+  color: rgba(255, 255, 255, 0.5);
+  content: attr(count);
+  position: absolute;
+  right: 5px;
+}
+#game .tools li:hover,
+#game .tools li.active {
+  background-color: rgba(98, 118, 154, 0.5);
+}
+#game .tools li:first-child {
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+#game .tools li[type="cables"] {
+  background-image: url(../images/tool_cables.png);
+}
+#game .tools li[type="resistor"] {
+  background-image: url(../images/tool_resistor.png);
+}
+#game .grid {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#game .grid .tile {
+  background: transparent;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.025);
+  border-right: 1px dashed rgba(255, 255, 255, 0.025);
+  cursor: pointer;
+  height: 48px;
+  position: absolute;
+  transition: background 0.5s ease;
+  width: 48px;
+}
+#game .grid .tile:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+#game .grid .tile[x="0"] {
+  border-left: 1px dashed rgba(255, 255, 255, 0.025);
+}
+#game .grid .tile[y="0"] {
+  border-top: 1px dashed rgba(255, 255, 255, 0.025);
+}
+#game .grid .entity {
+  background-position: center center;
+  height: 48px;
+  pointer-events: none;
+  position: absolute;
+  width: 48px;
+}
+#game .grid .entity[type="house"]::after,
+#game .grid .entity[type="generator"]::after,
+#game .grid .entity[type="resistor"]::after {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  transition: color 0.5s ease;
+  top: -20px;
+  width: 48px;
+  z-index: 10;
+}
+#game .grid .entity[type="house"][type="house"]::after,
+#game .grid .entity[type="generator"][type="house"]::after,
+#game .grid .entity[type="resistor"][type="house"]::after {
+  content: attr(power) '/' attr(input);
+}
+#game .grid .entity[type="house"][type="generator"]::after,
+#game .grid .entity[type="generator"][type="generator"]::after,
+#game .grid .entity[type="resistor"][type="generator"]::after,
+#game .grid .entity[type="house"][type="resistor"]::after,
+#game .grid .entity[type="generator"][type="resistor"]::after,
+#game .grid .entity[type="resistor"][type="resistor"]::after {
+  content: attr(output);
+  color: #93bb4e;
+}
+#game .grid .entity[type="tree-tiered"] {
+  background-image: url(../images/entity-tree-tiered.png);
+}
+#game .grid .entity[type="tree-single"] {
+  background-image: url(../images/entity-tree-single.png);
+}
+#game .grid .entity[type="generator"] {
+  background-image: url(../images/entity-generator.png);
+}
+#game .grid .entity[type="generator"][linked-north="true"] {
+  background-image: url(../images/entity-generator-n.png);
+}
+#game .grid .entity[type="generator"][linked-south="true"] {
+  background-image: url(../images/entity-generator-s.png);
+}
+#game .grid .entity[type="generator"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-generator-ns.png);
+}
+#game .grid .entity[type="generator"][linked-east="true"] {
+  background-image: url(../images/entity-generator-e.png);
+}
+#game .grid .entity[type="generator"][linked-west="true"] {
+  background-image: url(../images/entity-generator-w.png);
+}
+#game .grid .entity[type="generator"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-generator-ew.png);
+}
+#game .grid .entity[type="generator"][linked-north="true"][linked-east="true"] {
+  background-image: url(../images/entity-generator-ne.png);
+}
+#game .grid .entity[type="generator"][linked-north="true"][linked-west="true"] {
+  background-image: url(../images/entity-generator-nw.png);
+}
+#game .grid .entity[type="generator"][linked-south="true"][linked-east="true"] {
+  background-image: url(../images/entity-generator-se.png);
+}
+#game .grid .entity[type="generator"][linked-south="true"][linked-west="true"] {
+  background-image: url(../images/entity-generator-sw.png);
+}
+#game .grid .entity[type="generator"][linked-north="true"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-generator-new.png);
+}
+#game .grid .entity[type="generator"][linked-north="true"][linked-south="true"][linked-east="true"] {
+  background-image: url(../images/entity-generator-nse.png);
+}
+#game .grid .entity[type="generator"][linked-north="true"][linked-south="true"][linked-west="true"] {
+  background-image: url(../images/entity-generator-nsw.png);
+}
+#game .grid .entity[type="generator"][linked-south="true"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-generator-sew.png);
+}
+#game .grid .entity[type="generator"][linked-north="true"][linked-south="true"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-generator-nsew.png);
+}
+#game .grid .entity[type="house"] {
+  background-image: url(../images/entity-house.png);
+}
+#game .grid .entity[type="house"][powered="true"]::after {
+  color: #93bb4e;
+}
+#game .grid .entity[type="house"][powered="true"]::before {
+  background-image: url(../images/entity-house-powered.png);
+  bottom: 0;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#game .grid .entity[type="house"][overpowered="true"]::after {
+  color: #e46539;
+}
+#game .grid .entity[type="house"][linked-north="true"] {
+  background-image: url(../images/entity-house-n.png);
+}
+#game .grid .entity[type="house"][linked-south="true"] {
+  background-image: url(../images/entity-house-s.png);
+}
+#game .grid .entity[type="house"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-house-ns.png);
+}
+#game .grid .entity[type="house"][linked-east="true"] {
+  background-image: url(../images/entity-house-e.png);
+}
+#game .grid .entity[type="house"][linked-west="true"] {
+  background-image: url(../images/entity-house-w.png);
+}
+#game .grid .entity[type="house"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-house-ew.png);
+}
+#game .grid .entity[type="house"][linked-north="true"][linked-east="true"] {
+  background-image: url(../images/entity-house-ne.png);
+}
+#game .grid .entity[type="house"][linked-north="true"][linked-west="true"] {
+  background-image: url(../images/entity-house-nw.png);
+}
+#game .grid .entity[type="house"][linked-south="true"][linked-east="true"] {
+  background-image: url(../images/entity-house-se.png);
+}
+#game .grid .entity[type="house"][linked-south="true"][linked-west="true"] {
+  background-image: url(../images/entity-house-sw.png);
+}
+#game .grid .entity[type="house"][linked-north="true"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-house-new.png);
+}
+#game .grid .entity[type="house"][linked-north="true"][linked-south="true"][linked-east="true"] {
+  background-image: url(../images/entity-house-nse.png);
+}
+#game .grid .entity[type="house"][linked-north="true"][linked-south="true"][linked-west="true"] {
+  background-image: url(../images/entity-house-nsw.png);
+}
+#game .grid .entity[type="house"][linked-south="true"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-house-sew.png);
+}
+#game .grid .entity[type="house"][linked-north="true"][linked-south="true"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-house-nsew.png);
+}
+#game .grid .entity[type="cables"] {
+  background-image: url(../images/entity-cables.png);
+}
+#game .grid .entity[type="cables"][linked-north="true"] {
+  background-image: url(../images/entity-cables-n.png);
+}
+#game .grid .entity[type="cables"][linked-south="true"] {
+  background-image: url(../images/entity-cables-s.png);
+}
+#game .grid .entity[type="cables"][linked-north="true"][linked-south="true"] {
+  background-image: url(../images/entity-cables-ns.png);
+}
+#game .grid .entity[type="cables"][linked-east="true"] {
+  background-image: url(../images/entity-cables-e.png);
+}
+#game .grid .entity[type="cables"][linked-west="true"] {
+  background-image: url(../images/entity-cables-w.png);
+}
+#game .grid .entity[type="cables"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-cables-ew.png);
+}
+#game .grid .entity[type="cables"][linked-north="true"][linked-east="true"] {
+  background-image: url(../images/entity-cables-ne.png);
+}
+#game .grid .entity[type="cables"][linked-north="true"][linked-west="true"] {
+  background-image: url(../images/entity-cables-nw.png);
+}
+#game .grid .entity[type="cables"][linked-south="true"][linked-east="true"] {
+  background-image: url(../images/entity-cables-se.png);
+}
+#game .grid .entity[type="cables"][linked-south="true"][linked-west="true"] {
+  background-image: url(../images/entity-cables-sw.png);
+}
+#game .grid .entity[type="resistor"] {
+  background-image: url(../images/entity-resistor.png);
+}
+#game .grid .entity[type="resistor"][linked-north="true"] {
+  background-image: url(../images/entity-resistor-n.png);
+}
+#game .grid .entity[type="resistor"][linked-south="true"] {
+  background-image: url(../images/entity-resistor-s.png);
+}
+#game .grid .entity[type="resistor"][linked-north="true"][linked-south="true"] {
+  background-image: url(../images/entity-resistor-ns.png);
+}
+#game .grid .entity[type="resistor"][linked-east="true"] {
+  background-image: url(../images/entity-resistor-e.png);
+}
+#game .grid .entity[type="resistor"][linked-west="true"] {
+  background-image: url(../images/entity-resistor-w.png);
+}
+#game .grid .entity[type="resistor"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-resistor-ew.png);
+}
+#game .grid .entity[type="resistor"][linked-north="true"][linked-east="true"] {
+  background-image: url(../images/entity-resistor-ne.png);
+}
+#game .grid .entity[type="resistor"][linked-north="true"][linked-west="true"] {
+  background-image: url(../images/entity-resistor-nw.png);
+}
+#game .grid .entity[type="resistor"][linked-south="true"][linked-east="true"] {
+  background-image: url(../images/entity-resistor-se.png);
+}
+#game .grid .entity[type="resistor"][linked-south="true"][linked-west="true"] {
+  background-image: url(../images/entity-resistor-sw.png);
+}
+#game .grid .entity[type="resistor"][linked-north="true"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-resistor-new.png);
+}
+#game .grid .entity[type="resistor"][linked-north="true"][linked-south="true"][linked-east="true"] {
+  background-image: url(../images/entity-resistor-nse.png);
+}
+#game .grid .entity[type="resistor"][linked-north="true"][linked-south="true"][linked-west="true"] {
+  background-image: url(../images/entity-resistor-nsw.png);
+}
+#game .grid .entity[type="resistor"][linked-south="true"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-resistor-sew.png);
+}
+#game .grid .entity[type="resistor"][linked-north="true"][linked-south="true"][linked-east="true"][linked-west="true"] {
+  background-image: url(../images/entity-resistor-nsew.png);
+}
+/*# sourceMappingURL=style.css.map */
