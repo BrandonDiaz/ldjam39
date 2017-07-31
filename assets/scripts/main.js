@@ -468,7 +468,7 @@ $(document).ready(function () {
 				delete window.entities[x + ',' + y];
 				
 				$('.entity[x="' + x + '"][y="' + y + '"]').remove();
-				$('#game .tools li[type="' + type + '"]').attr('count', count + 1);
+				$('#game .tools li[type="' + type + '"]').attr('count', parseInt($('#game .tools li[type="' + type + '"]').attr('count')) + 1);
 				
 				playSound('remove');
 			}
